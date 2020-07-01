@@ -11,8 +11,8 @@ import SwiftUI
 class ImageMemoryGame: ObservableObject {
     @Published private var model: MemoryGame<UIImage> = createMemoryGame()
         
-    static func createMemoryGame() -> MemoryGame<UIImage> {
-        let emojis: Array<UIImage> = [#imageLiteral(resourceName: "luffy"), #imageLiteral(resourceName: "zoro2"), #imageLiteral(resourceName: "sanji2"), #imageLiteral(resourceName: "usopp")]
+    private static func createMemoryGame() -> MemoryGame<UIImage> {
+        let emojis: Array<UIImage> = [#imageLiteral(resourceName: "luffy"), #imageLiteral(resourceName: "zoro"), #imageLiteral(resourceName: "nami"), #imageLiteral(resourceName: "usopp")]
         return MemoryGame<UIImage>(numberOfPairsOfCards: emojis.count) { pairIndex in
             return emojis[pairIndex]
         }
@@ -28,6 +28,10 @@ class ImageMemoryGame: ObservableObject {
     
     func choose(card: MemoryGame<UIImage>.Card) {
         model.choose(card: card)
+    }
+    
+    func resetGame() {
+        model = ImageMemoryGame.createMemoryGame()
     }
 }
 
